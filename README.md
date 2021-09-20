@@ -1,1 +1,2 @@
 # Note
+* https://esecutech.com/wiki/index.php/UniKey_API_Reference_for_C_Language
