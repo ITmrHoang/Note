@@ -86,4 +86,4 @@ LABEL="default_end"
 
 # UniKey 
 ATTRS{idVendor}=="0403", ATTRS{idProduct}=="c580", MODE="0666"
-ATTRS{idVendor}=="0403", ATTRS{idProduct}=="c583", MODE="0666"
+ATTRS{idVendor}=="0403", ATTRS{idProduct}=="c583", MODE="0666"1
