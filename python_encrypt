@@ -1,0 +1,1 @@
+python encrypt.py -s "<path proẹct>" -e <manage.py:main / file chưa hàm thực thi: hàm thực thi> -o "<path out>"
