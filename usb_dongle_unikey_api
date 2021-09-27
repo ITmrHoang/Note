@@ -1,1 +1,33 @@
 https://esecutech.com/wiki/index.php/UniKey_API_Reference_for_C_Language
+
+///run file ra So nếu lỗi
+https://stackoverflow.com/questions/655163/convert-a-static-library-to-a-shared-library
+
+
+// python doc
+import ctypes as C
+
+dll = C.cdll.LoadLibrary('/home/hoang/Documents/UniKey_SDK/Libraries/Linux64.C/GCC4.X/Sample/UniKey.so')
+
+h=C.c_short()
+lp1 = C.c_ulong()
+lp2 = C.c_ulong()
+dll.UniKey_Find(C.byref (h) , C.byref (lp1) , C.byref(lp2))
+print(lp1)
+
+p1 = C.c_uint(<pass1>)
+p2 = C.c_uint(<pass2>)
+p3 = C.c_uint(<pass3>)
+p4 = C.c_uint(<pass4>)
+retcode = dll.UniKey_User_Logon(C.byref (h) , C.byref (p1) , C.byref(p2))
+if retcode:
+	print("UniKey_User_Logon error code:", retcode)
+else:
+	print("UniKey_User_Logon is successfull")
+
+retcode = dll.UniKey_Vender_Logon(C.byref (h) , C.byref (p1) , C.byref(p2), C.byref(p3), C.byref(p4))
+if retcode:
+	print("UniKey_Vender_Logon error code:", retcode)
+else:
+	print("UniKey_Vender_Logon is successfull")
+
