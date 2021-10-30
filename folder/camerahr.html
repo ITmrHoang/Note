@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Admin | Face Recognize </title>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="/static/plugins/fontawesome-free/css/all.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="/static/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/static/dist/css/adminlte.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/static/dist/css/style.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+    <div class="wrapper">
+        <!-- Main content -->
+        <section class="content">
+            {{ room_name|json_script:"room-name" }}
+            <div class="container-fluid">
+                <!-- Main row -->
+                <div class="row">
+                    <!-- Left col -->
+                    <div class="col-sm-8 col-md-10">
+                        <!-- STACKED BAR CHART -->
+                        <div class="card">
+                            <div class="card-title"> <h2 class="text-center">Camera hàng rào</h2></div>
+                            <div class="card-body">
+                                <div class="row row-eq-height d-flex  flex-wrap justify-content-around">
+                                    <div class="col-xs-12 col-sm-6 col-md-4 col-xl-2 div_hr hr_active">
+                                        <div class="overlay_top_right"><i class="fa fa-cog"></i></div>
+                                        <img class='camera_hr' style="-webkit-user-select: none;margin: auto;background-color: hsl(0, 0%, 25%);" src="http://192.168.1.245/Streams/1/4/ReceiveData">
+                                    </div>
+                                    
+                                
+                                    <div class="col-xs-12 col-sm-6 col-md-4  col-xl-2 div_hr hr_active">
+                                        <img class='camera_hr' style="-webkit-user-select: none;margin: auto;background-color: hsl(0, 0%, 25%);" src="http://192.168.1.246/Streams/1/4/ReceiveData" alt="Camera chưa đăng nhập">
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6 col-md-4 col-xl-2 div_hr">
+                                        <img  class='camera_hr' style="-webkit-user-select: none;margin: auto;background-color: hsl(0, 0%, 25%);" src="http://192.168.1.246/Streams/1/4/ReceiveData">
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6 col-md-4 col-xl-2 div_hr">
+                                        <img class='camera_hr' style="-webkit-user-select: none;margin: auto;background-color: hsl(0, 0%, 25%);" src="http://192.168.1.246/Streams/1/4/ReceiveData">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4 col-xl-2 div_hr">
+
+                                        <img class='camera_hr' style="-webkit-user-select: none;margin: auto;background-color: hsl(0, 0%, 25%);" src="http://192.168.1.246/Streams/1/4/ReceiveData">
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6 col-md-4 col-xl-2 div_hr">
+                                        <img class='camera_hr' style="-webkit-user-select: none;margin: auto;background-color: hsl(0, 0%, 25%);" src="http://192.168.1.246/Streams/1/4/ReceiveData">
+                                    </div>
+                             
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-sm-4 col-md-2" style="width:100vh">
+                        <div class="row">
+                            <div class="col-12 text-center text-danger"><h2>CẢNH BÁO XÂM NHẬP</h2> </div>
+                        </div>
+                        <div class="col-12 show_img_hr" id="show_img_hr">
+                            <div class="container_img_hr">
+                                <div class="overlay_top_right remove_img_hr"> <i class="fa fa-window-close"></i></div>
+                                <img src="/static/dist/img/avatar2.png" alt="Avatar" class="image_view_hr">
+                                <div class="overlay_img_hr" >My Name is John</div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- ./wrapper -->
+
+
+    <div class="modal fade" id="modal_show_img" tabindex="-1" role="dialog" aria-labelledby="modal_show_img" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">              
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <img src="" id="imghrpreview" style="width: 100%;" >
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="/static/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/static/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="/static/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/static/dist/js/adminlte.js"></script>
+    <script>
+        $(document).ready(function() {
+            // let url = 'http://admin@192.168.1.245/Streams/1/4/ReceiveData';
+            let url = 'http://admin@192.168.1.246/Streams/1/4/ReceiveData';
+            // let camera1 = window.open(url);
+            // Object.assign(document.createElement('a'), {
+            //     target: '_blank',
+            //     href: url,
+            // }).click();
+        });
+        
+        const MAX_IMG_HR = 3;
+
+        const roomName = JSON.parse(document.getElementById('room-name').textContent);
+        const ws = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/camerahr/'
+            + roomName
+            + '/'
+            );
+
+            
+        ws.onopen = function(event) {
+            console.log("WebSocket is open now.");
+            ws.send("connect");
+        };  
+           
+        ws.onmessage = function (event) {
+            msg=JSON.parse(event.data);
+            console.log(msg)
+            
+            
+            if (msg.type=='frame') {
+                console.log('vao')
+                el = `<div class="container_img_hr" id="1">
+                                <div class="overlay_top_right remove_img_hr"> <i class="fa fa-window-close"></i></div>
+                                <img src="/static/dist/img/avatar2.png" alt="Avatar" class="image_view_hr" data-add='12' onclick="console.log('img')">
+                                <div class="overlay_img_hr"  onclick="console.log('div')">My Name is John</div>
+                            </div>`
+                $('#show_img_hr').before(el);
+                let elimghr = document.getElementsByClassName("container_img_hr");
+                if(elimghr.length > MAX_IMG_HR){
+                    console.log('max');
+                    for (i = elimghr.length ; i>=3; i--){
+                        try {
+                            elimghr[i].remove();
+                        } catch (error) {
+                            console.error(error);
+                            // expected output: ReferenceError: nonExistentFunction is not defined
+                            // Note - error messages will vary depending on browser
+                        }
+                    }
+                }
+                
+            }
+
+            else if (msg.type==='data_first') {
+                let list_data = msg.data;
+                if (list_data.length > 0){
+                    for (i = (list_data.length - 1); i >= 0 ; i--) {
+                        el = `<div class="container_img_hr">
+                                    <div class="overlay_top_right remove_img_hr"> <i class="fa fa-window-close"></i></div>
+                                    <img src="/static/dist/img/avatar2.png" alt="Avatar" class="image_view_hr">
+                                    <div class="overlay_img_hr">My Name is John</div>
+                                </div>`
+                        $('#show_img_hr').before(el);
+                    }
+                }
+            }
+        };
+        
+
+    
+        ws.onclose= function(event){
+            console.log('Connection closed!')
+        }
+        ws.onerror=function(event){
+            console.log('An error occur!')
+        }
+
+        $(function() {
+            $(document).on('click', '.image_view_hr', function(e) {
+                e.preventDefault();
+                console.log('showimg', this)
+                $('#imghrpreview').attr('src', $(this).attr('src'));
+                $('#modal_show_img').modal('show');   
+            });
+
+            // remove img show 
+            $(document).on('click', '.remove_img_hr',function(e) {
+                e.preventDefault();
+                $(this).parent().remove()
+            });
+        });
+    </script>
+</body>
+
+</html>

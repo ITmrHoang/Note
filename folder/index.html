@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Admin | Face Recognize </title>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="/static/plugins/fontawesome-free/css/all.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="/static/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/static/dist/css/adminlte.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/static/dist/css/style.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+    <div class="wrapper">
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <!-- Main row -->
+                <div class="row">
+                    <!-- Left col -->
+                    <div class="col-md-12">
+                        <!-- STACKED BAR CHART -->
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row row-eq-height">
+                                    <div class="col-lg-1 p-0">
+                                        <div class="box-one border p-1">
+                                            <!-- <div class="title pb-3 font-weight-bold">Faces</div> -->
+                                            <div class="title pb-1 font-weight-bold text-center">người vào</div>
+                                            <div class="list-img border" id="face_crop_imgs" style="height: 39vh;">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">
+                                                            face_id
+                                                        </h3>
+                                                    </div>
+                                                    <!-- /.card-header -->
+                                                    <div class="card-body text-center card-body-img">
+                                                        <img src="{% static 'faces/avatar.png' %}" style="max-width:100%;max-height:100%;" alt="My image">
+                                                    </div>
+                                                    <!-- /.card-body -->
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="title pb-1 font-weight-bold text-center">người ra</div>
+                                            <!-- <div class="title pb-3 font-weight-bold">Faces</div> -->
+                                            <div class="list-img border" id="face_crop_imgs2" style="height: 39vh;">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">
+                                                            face_id
+                                                        </h3>
+                                                    </div>
+                                                    <!-- /.card-header -->
+                                                    <div class="card-body text-center card-body-img">
+                                                        <img src="{% static 'faces/avatar.png' %}" style="max-width:100%;max-height:100%;" alt="My image">
+                                                    </div>
+                                                    <!-- /.card-body -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1 p-0">
+                                        <div class="box-one border p-1">
+                                            <div class="title pb-1 font-weight-bold text-center">biển vào</div>
+                                            <div class="list-img border" id="license_crop_imgs" style="height: 39vh;">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">
+                                                            license
+                                                        </h3>
+                                                    </div>
+                                                    <!-- /.card-header -->
+                                                    <div class="card-body text-center card-body-img">
+                                                        <img src="{% static 'faces/avatar.png' %}" style="max-width:100%;max-height:100%;" alt="My image">
+                                                    </div>
+                                                    <!-- /.card-body -->
+                                                </div>
+                                            </div>
+                                
+                                            <div class="title pb-1 font-weight-bold text-center">biển ra</div>
+                                            <div class="list-img border" id="license_crop_imgs2" style="height: 39vh;">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">
+                                                            license
+                                                        </h3>
+                                                    </div>
+                                                    <!-- /.card-header -->
+                                                    <div class="card-body text-center card-body-img">
+                                                        <img src="{% static 'faces/avatar.png' %}" style="max-width:100%;max-height:100%;" alt="My image">
+                                                    </div>
+                                                    <!-- /.card-body -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{ room_name|json_script:"room-name" }}
+                                    <div class="col-lg-8">
+                                        <div class="box-two border p-1 row">
+                                            <!-- <div class="title font-weight-bold mb-3">Camera Stream</div> -->
+                                            <div class="col-lg-6">
+                                                <img id="camera" src="" alt="" style="max-width:100%; max-height:39vh;">
+                                            </div>
+                                            <div class="col-lg-6" >
+                                                <img id="camera3" src="" alt="" style="max-width:100%; max-height:39vh;">
+                                            </div>
+
+                                            <div class="col-lg-6" >
+                                                <img id="camera2" src="" alt="" style="max-width:100%; max-height:39vh;">
+                                            </div>
+                                            <div class="col-lg-6" >
+                                                <img id="camera4" src="" alt="" style="max-width:100%; max-height:39vh;">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-1 p-0">
+                                        <div class="box-one border p-1">
+                                            <div class="title pb-1 font-weight-bold text-center">Người vào</div>
+                                            <div class="list-img border" id="face_crop_imgs3" style="height: 39vh;">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">
+                                                            face_id
+                                                        </h3>
+                                                    </div>
+                                                    <!-- /.card-header -->
+                                                    <div class="card-body text-center card-body-img">
+                                                        <img src="{% static 'faces/avatar.png' %}" style="max-width:100%;max-height:100%;" alt="My image">
+                                                    </div>
+                                                    <!-- /.card-body -->
+                                                </div>
+                                            </div>
+
+                                            <div class="title pb-1 font-weight-bold text-center">Người ra</div>
+                                            <!-- <div class="title pb-3 font-weight-bold">Faces</div> -->
+                                            <div class="list-img border" id="face_crop_imgs4" style="height: 39vh;">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">
+                                                            face_id
+                                                        </h3>
+                                                    </div>
+                                                    <!-- /.card-header -->
+                                                    <div class="card-body text-center card-body-img">
+                                                        <img src="{% static 'faces/avatar.png' %}" style="max-width:100%;max-height:100%;" alt="My image">
+                                                    </div>
+                                                    <!-- /.card-body -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-1 p-0">
+                                        <div class="box-one border p-1">
+                                       
+                                            <div class="title pb-1 font-weight-bold text-center">biển vào</div>
+                                            <div class="list-img border" id="license_crop_imgs3" style="height: 39vh;">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">
+                                                            license
+                                                        </h3>
+                                                    </div>
+                                                    <!-- /.card-header -->
+                                                    <div class="card-body text-center  card-body-img">
+                                                        <img src="{% static 'faces/avatar.png' %}" style="max-width:100%;max-height:100%;" alt="My image">
+                                                    </div>
+                                                    <!-- /.card-body -->
+                                                </div>
+                                            </div>
+                                            <div class="title pb-1 font-weight-bold text-center">biển ra</div>
+                                            <div class="list-img border" id="license_crop_imgs4" style="height: 39vh;">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">
+                                                            license
+                                                        </h3>
+                                                    </div>
+                                                    <!-- /.card-header -->
+                                                    <div class="card-body text-center  card-body-img">
+                                                        <img src="{% static 'faces/avatar.png' %}" style="max-width:100%;max-height:100%;" alt="My image">
+                                                    </div>
+                                                    <!-- /.card-body -->
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="/static/plugins/jquery/jquery.min.js"></script>
+    <script src="/static/plugins/media-stream-player-js/media-stream-library.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/static/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="/static/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/static/dist/js/adminlte.js"></script>
+    <script>
+        $(document).ready(function() {
+            
+        });
+
+        const roomName = JSON.parse(document.getElementById('room-name').textContent);
+        const ws = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/videostream/'
+            + roomName
+            + '/'
+            );
+
+        ws.onmessage = function (event) {
+            msg=JSON.parse(event.data);
+ 
+            if(msg.type==='frame') {
+                if(msg.cam_idx == '1') {
+                    var img_container=document.querySelector("#camera");
+                    img_container.src=msg.data;
+                } 
+                else if (msg.cam_idx == '2') {
+                    var img_container=document.querySelector("#camera2");
+                    img_container.src=msg.data;
+                }
+                else if (msg.cam_idx == '3') {
+                    var img_container=document.querySelector("#camera3");
+                    img_container.src=msg.data;
+                }
+                else if (msg.cam_idx == '4') {
+                    var img_container=document.querySelector("#camera4");
+                    img_container.src=msg.data;
+                }
+              
+            }
+            else if (msg.type==='crop') {
+                console.log(msg.cam_idx)
+                let i;
+                let text='';
+                let text2='';
+                for (i = (msg.data.face_imgs.length - 1); i >= 0 ; i--) {
+                    text += '<div class="card">';
+                    text += '<div class="card-header">';
+                    text += '<h3 class="card-title">';
+                    text += msg.data.face_infos[i];
+                    text += '</h3>';
+                    text += '</div>';
+                    text += '<div class="card-body text-center card-body-img">';
+                    // insert img
+                    text += '<img src=' + msg.data.face_imgs[i] + ' alt="" style="max-width:100%;max-height:100%;" >';
+                    text += '</div>';
+                    text += '</div>';
+
+
+
+                    text2 += '<div class="card">';
+                    text2 += '<div class="card-header">';
+                    text2 += '<h3 class="card-title">';
+                    text2 += msg.data.lp_texts[i];
+                    text2 += '</h3>';
+                    text2 += '</div>';
+                    text2 += '<div class="card-body text-center card-body-img">';
+                    // insert img
+                    text2 += '<img src=' + msg.data.lp_imgs[i] + ' alt="" style="max-width:100%;max-height:100%;" >';
+                    text2 += '</div>';
+                    text2 += '</div>';
+                }
+                
+                if(msg.cam_idx == '1' ) {
+                    $('#face_crop_imgs').html(text);
+                } else if (msg.cam_idx == '2') {
+                    $('#face_crop_imgs2').html(text);
+                } else if (msg.cam_idx == '3') {
+                    $('#face_crop_imgs3').html(text);
+                } else if (msg.cam_idx == '4') {
+                    $('#face_crop_imgs4').html(text);
+                }
+
+                if(msg.cam_idx == '1') {
+                    $('#license_crop_imgs').html(text2);
+                } else if (msg.cam_idx == '2' ) {
+                    $('#license_crop_imgs2').html(text2);
+                } else if (msg.cam_idx == '3' ) {
+                    $('#license_crop_imgs3').html(text2);
+                } else
+                 if (msg.cam_idx == '4' ) {
+                    $('#license_crop_imgs4').html(text2);
+                }
+               
+            }
+        };
+
+        ws.onclose= function(event){
+            console.log('Connection closed!')
+        }
+        ws.onerror=function(event){
+            console.log('An error occur!')
+        }
+    </script>
+</body>
+
+</html>
