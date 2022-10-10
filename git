@@ -1,0 +1,1 @@
+set proxy git in VPS:  git config --global http.proxy http://192.168.7.216:3130
