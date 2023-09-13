@@ -1,6 +1,6 @@
 Error git
 
-hint: Diverging branches can't be fast-forwarded, you need to either:
+`hint: Diverging branches can't be fast-forwarded, you need to either:
 hint: 
 hint:   git merge --no-ff
 hint: 
@@ -23,6 +23,7 @@ hint: preference for all repositories. You can also pass --rebase, --no-rebase,
 hint: or --ff-only on the command line to override the configured default per
 hint: invocation.
 fatal: Need to specify how to reconcile divergent branches.
+`
 
 
 # Solution
