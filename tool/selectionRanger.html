@@ -26,6 +26,8 @@ var range = document.createRange();
 range.setStartBefore($newSelection.first()[0]);
 range.setEndAfter($newSelection.last()[0]);
 selection.removeAllRanges();
+   //copyText.select();
+  //copyText.setSelectionRange(0, 99999); // For mobile devices
 selection.addRange(range);
   document.execCommand('copy')
 }
