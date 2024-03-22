@@ -92,3 +92,54 @@ $result = call_user_func_array("add", $parameters);
 // In kết quả
 echo "Result: " . $result; // Kết quả sẽ là 5
 ?>
+
+
+// advance
+
+// Lớp cha với xử lý ngoại lệ
+class ParentClass {
+    // Phương thức chung xử lý ngoại lệ
+    protected function handleException(callable $callback, $args) {
+        try {
+            // Gọi phương thức được chỉ định
+            return call_user_func_array($callback, $args);
+        } catch (Exception $e) {
+            // Xử lý ngoại lệ
+            echo "An error occurred: " . $e->getMessage() . "\n";
+            throw $e; // Ném lại ngoại lệ để xử lý ở nơi khác nếu cần
+        }
+    }
+    
+    // Ghi đè tất cả các phương thức của lớp cha để bọc chúng trong xử lý ngoại lệ
+    public function __call($name, $args) {
+        if (method_exists($this, $name)) {
+            return $this->handleException([$this, $name], $args);
+        } else {
+            throw new Exception("Method $name not found.");
+        }
+    }
+}
+
+// Lớp con kế thừa từ lớp cha và có các phương thức bình thường
+class ChildClass extends ParentClass {
+    public function method1() {
+        // Một phương thức có thể sinh ra ngoại lệ
+        throw new Exception("Error in method1");
+    }
+
+    public function method2() {
+        // Một phương thức khác
+        return "Result from method2";
+    }
+}
+
+// Sử dụng lớp con với các phương thức đã được bọc trong xử lý ngoại lệ
+$child = new ChildClass();
+try {
+    echo $child->method1() . "\n";
+} catch (Exception $e) {
+    echo "Caught error: " . $e->getMessage() . "\n";
+}
+
+echo $child->method2() . "\n";
+
