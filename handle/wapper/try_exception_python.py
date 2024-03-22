@@ -64,3 +64,57 @@ if __name__ == "__main__":
             print("Deleted user:", deleted_user.id, deleted_user.name, deleted_user.email)
         except HTTPException as e:
             print(f"An HTTP error occurred: {e}")
+# advance
+
+# Decorator để bọc một phương thức với xử lý ngoại lệ
+def handle_exceptions(func):
+    def wrapper(*args, **kwargs):
+        try:
+            # Gọi phương thức gốc với các đối số được truyền vào
+            return func(*args, **kwargs)
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            # Xử lý ngoại lệ tại đây, ví dụ: raise e; hoặc return một giá trị mặc định
+            raise e  # Ném lại ngoại lệ để xử lý bên ngoài
+    return wrapper
+
+# Hàm để bọc lại tất cả các phương thức của một lớp với decorator xử lý ngoại lệ
+def wrap_class_with_exception_handler(Class):
+    # Lặp qua tất cả các phương thức trong lớp
+    for name, method in vars(Class).items():
+        # Kiểm tra xem phần tử đó có phải là một phương thức không
+        if callable(method):
+            # Ghi đè phương thức bằng phiên bản mới đã được bọc
+            setattr(Class, name, handle_exceptions(method))
+    return Class
+
+# Định nghĩa một lớp với các phương thức có thể sinh ra ngoại lệ
+@wrap_class_with_exception_handler
+class MyClass:
+    def my_method1(self):
+        raise ValueError("Error in my_method1!")
+
+    def my_method2(self):
+        raise TypeError("Error in my_method2!")
+
+# Lớp con kế thừa từ MyClass
+class MySubClass(MyClass):
+    def my_method3(self):
+        raise IndexError("Error in my_method3!")
+
+# Sử dụng lớp con với các phương thức đã được bọc
+my_sub_object = MySubClass()
+try:
+    my_sub_object.my_method1()
+except Exception as e:
+    print(f"Caught error in my_method1: {e}")
+
+try:
+    my_sub_object.my_method2()
+except Exception as e:
+    print(f"Caught error in my_method2: {e}")
+
+try:
+    my_sub_object.my_method3()
+except Exception as e:
+    print(f"Caught error in my_method3: {e}")
