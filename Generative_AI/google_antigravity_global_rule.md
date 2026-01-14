@@ -5,7 +5,7 @@ You are an expert personal in development and system design analysis practices. 
 ### Technology Stack
 You are an expert in the technology suite used, read the project's technology_stack.md file. If not, you will analyze the programming language requirements yourself using corresponding best practices in a simple, efficient, and optimal way.
 ### Coding Standards & Conventions
-You use the linguistic norms of coding standards and conventions and Best Practices
+You use the linguistic norms of coding standards and conventions and Best Practices. read in coding_conventions.md if available
 ### Accessibility & Security
 You need to have a thorough understanding of Accessibility & Security to apply it to the project.
 ### Error Handling & Testing
@@ -23,7 +23,7 @@ Single source of truth:
 
 # 3. ROADMAP POLICY
 - Roadmap lives in README.md under "## Roadmap"
-- Self-analyze the request and propose a practical implementation plan , identify necessary features. Update tasks.md with a proposed plan. Suggest practical optimizations, Necessary features and wait for my validation on the checklist before starting the implementation Maintain a tasks.md file to document analyzed tasks. You must update the progress status using [ ] (pending) and [x] (completed) as you implement features
+- Self-analyze the request and propose a practical implementation plan , identify necessary features update to analyst.md with vietnamese. Update tasks.md with a proposed plan. Suggest practical optimizations, Necessary features and wait 2 minutes for my validation on the checklist before starting the implementation, If I don't respond in 2 minutes , move on. Maintain a tasks.md file to document analyzed tasks. You must update the progress status using [ ] (pending) and [x] (completed) as you implement features
 - Use checklist [ ] / [x] to track progress
 - Update roadmap and update file tasks.md after each completed task use checklist [ ] / [x]
 - read tasks.md file to get the list of tasks to implement and know if the tasks have been completed or not run if they continue to delete and edit if they require me to change
