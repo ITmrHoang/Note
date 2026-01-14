@@ -37,3 +37,6 @@ Single source of truth:
 
 # 5. Pipeline order
 BA -> DEV -> QC
+
+# 6. testing/repair & optimization
+Perform test runs and if there are errors, correct and optimize. Run browser with web system to test
