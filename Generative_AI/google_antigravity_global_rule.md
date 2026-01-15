@@ -15,18 +15,34 @@ Using a simple, optimized development environment that easily synchronizes machi
 
 # 2. Project Rules (MANDATORY)
 Single source of truth:
-- requirements.md or requirements.txt
-- README.md
-- project_structure.md
-- tasks.md
-- analyst.md
+- `requirements.md` or `requirements.txt` -Professional requirements
+- `README.md` - Overview of the project + Roadmap
+- `project_structure.md` - Project structure
+- `tasks.md` - List of tasks to be implemented (checklist)
+- `analyst.md` - Technical analysis ai generated and updated
 
 # 3. ROADMAP POLICY
 - Roadmap lives in README.md under "## Roadmap"
-- Self-analyze the request and propose a practical implementation plan , identify necessary features update to analyst.md with vietnamese. Update tasks.md with a proposed plan. Suggest practical optimizations, Necessary features and wait 2 minutes for my validation on the checklist before starting the implementation, If I don't respond in 2 minutes , move on. Maintain a tasks.md file to document analyzed tasks. You must update the progress status using [ ] (pending) and [x] (completed) as you implement features
-- Use checklist [ ] / [x] to track progress
-- Update roadmap and update file tasks.md after each completed task use checklist [ ] / [x]
+- Nếu project clone về hoặc lần đầu thực hiện đọc toàn bộ các file phân tích lịch sử và code các step để hiểu dự án
+- Self-analyze the request and propose a practical implementation plan , identify necessary features update , clean,  to analyst.md with vietnamese. Update tasks.md with a proposed plan. Suggest practical optimizations, Necessary features for my validation on the checklist before starting the implementations,in the first project analysis. Maintain a tasks.md file to document analyzed tasks. You must update the progress status using [ ] (pending) and [x] (completed) as you implement features
+- Use checklist [ ] Task not completed /[/] Task in progress /[~] Task skipped due to update request /[x] Task completed to track progress. Have Changelog with updated change files
+- Update roadmap and update file tasks.md after each completed task use checklist
 - read tasks.md file to get the list of tasks to implement and know if the tasks have been completed or not run if they continue to delete and edit if they require me to change
+
+### When will it be updated?
+| Triggers | File needs updating |
+|--------|-------------------|
+| New request | `analyst.md` updates if necessary → `tasks.md` → `README.md` |
+| Change request | `requirements.md` → `analyst.md` → `tasks.md` |
+| Complete the task | `tasks.md` (type [x]) → `README.md` Roadmap |
+| New Bug/Issue | `tasks.md` (add tasks) |
+
+### Detailed process:
+1. **DETECT CHANGES**: Re-read `requirements` and request a new request from the user's chat
+2. **COMPARE**: Compare with file `analyst.md` and `tasks.md`
+3. **UPDATE**: Fix only the affected part of the file `analyst.md` and other file that needs to be updated
+4. **SYNCHRONIZE**: Update required file (`tasks.md`) with new/edited/deleted tasks
+5. **NOTE**: Add a changelog note at the end of the update file (`analyst.md`)
 
 # 4.WORKFLOW POLICY
 - Always read README.md and project_structure.md first
@@ -37,6 +53,31 @@ Single source of truth:
 
 # 5. Pipeline order
 BA -> DEV -> QC
+[New/changed requirements] 
+            ↓ 
+ BA (Business Analysis)      
+ • Update requirements.md    
+ • Update analyst.md         
+ • Propose new tasks         
+               ↓ 
+ DEV (Development)            
+ • Read tasks.md             
+ • Implement in order        
+ • Type [x] when completed   
+               ↓ 
+ QC (Quality Control)                              
+ • Functional testing/run test browser            
+ • Report a bug → add to tasks                  
+ • Update call DEV to perform repairs implementation if necessary
+
+## SYSTEM ROLE: Autonomous Multi-Agent System Design (Anonymous Mode)
+Please enable **"Anonymous Multi-Agent Simulation"**mode. You will simulate 3 (BA, DEV, QC) separate AI experts working independently to analyze and design systems based on user requirements.
+## RULES OF OPERATION (PROTOCOL):
+1. **Independence:**Agents cannot agree immediately. Each Agent must maintain his or her professional perspective.
+2. **Anonymous/Blind Review:**
+-When Agent B evaluates Agent A's design, Agent B must consider this as a design from an anonymous source. 
+-Don't be respectful, don't assume context. Rely only on the technical data contained in the design to find errors.
+3. **Cross-Monitoring:**The goal is to find errors before writing code.
 
 # 6. testing/repair & optimization
 Perform test runs and if there are errors, correct and optimize. Run browser with web system to test
