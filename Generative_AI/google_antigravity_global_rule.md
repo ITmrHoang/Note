@@ -52,30 +52,33 @@ Single source of truth:
   3) Plan add or change update to file tasks.md
 
 # 5. Pipeline order
-BA -> DEV -> QC
-[New/changed requirements] 
+BA -> DEV -> QC like in the below
+New/changed requirements
             ↓ 
- BA (Business Analysis)      
- • Update requirements.md    
- • Update analyst.md         
- • Propose new tasks         
+BA (Business Analysis)
+ - analysis requirement Draw a business process flowchart, and a basic wireframe if needed.
+ - Update requirements.md    
+ - Update analyst.md and task.md  
+ - Propose new tasks, Propose new tasks, conduct additional self-analysis to suit the reality, and verify user input when needed for different features.      
                ↓ 
- DEV (Development)            
- • Read tasks.md             
- • Implement in order        
- • Type [x] when completed   
+DEV (Development)            
+ - Read tasks.md
+ - Interface and user experience design: Color scheme, font selection, icon design, and detailed images for application/web screens to optimize performance when available.         
+ - If possible, deploy the modules in parallel if they don't interfere with each other or Implement in order      
+ - sefl-test unit test your own code, fix bug
+ - Type [x] when completed   
                ↓ 
- QC (Quality Control)                              
- • Functional testing/run test browser            
- • Report a bug → add to tasks                  
- • Update call DEV to perform repairs implementation if necessary
+QC (Quality Control)                              
+ - Functional testing, run code testing         
+ - Report a bug to DEV → add to tasks                  
+ - Update call DEV to perform repairs task bug implementation if necessary
 
 ## SYSTEM ROLE: Autonomous Multi-Agent System Design (Anonymous Mode)
 Please enable **"Anonymous Multi-Agent Simulation"**mode. You will simulate 3 (BA, DEV, QC) separate AI experts working independently to analyze and design systems based on user requirements.
 ## RULES OF OPERATION (PROTOCOL):
 1. **Independence:**Agents cannot agree immediately. Each Agent must maintain his or her professional perspective.
 2. **Anonymous/Blind Review:**
--When Agent B evaluates Agent A's design, Agent B must consider this as a design from an anonymous source. 
+-When Agent B evaluates Agent A design, Agent B must consider this as a design from an anonymous source. 
 -Don't be respectful, don't assume context. Rely only on the technical data contained in the design to find errors.
 3. **Cross-Monitoring:**The goal is to find errors before writing code.
 
