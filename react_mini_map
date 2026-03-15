@@ -1,0 +1,33 @@
+import ReactFlow, { MiniMap } from 'reactflow';
+import { useState, useEffect } from 'react';
+// import { toPng } from 'html-to-image'; // Thư viện chụp ảnh DOM
+
+function Flow() {
+  const [screenshotUrl, setScreenshotUrl] = useState(null);
+
+  // Giả lập logic chụp ảnh Canvas mỗi khi Graph thay đổi
+  // useEffect(() => {
+  //   toPng(document.querySelector('.react-flow__pane'))
+  //     .then((dataUrl) => setScreenshotUrl(dataUrl));
+  // }, [nodes, edges]);
+
+  return (
+    <ReactFlow nodes={nodes} edges={edges}>
+      <MiniMap 
+        // 1. Giấu các node mặc định đi (bằng cách cho kích thước = 0 hoặc trong suốt)
+        nodeColor="transparent"
+        nodeStrokeColor="transparent"
+        // 2. Chèn cái ảnh chụp Canvas của anh vào làm Background
+        style={{
+          backgroundImage: `url(${screenshotUrl})`,
+          backgroundSize: 'contain',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundColor: '#f1f1f1'
+        }}
+        // Khung nhìn Viewport mask (cái ô chữ nhật chỉ vùng đang xem) vẫn sẽ hoạt động trơn tru!
+        maskColor="rgba(0, 0, 0, 0.3)" 
+      />
+    </ReactFlow>
+  );
+}
