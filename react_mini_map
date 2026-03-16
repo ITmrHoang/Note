@@ -31,3 +31,87 @@ function Flow() {
     </ReactFlow>
   );
 }
+
+
+-------------
+
+import React from 'react';
+import ReactFlow, { 
+  useReactFlow, 
+  getNodesBounds, 
+  getTransformForBounds,
+  Panel 
+} from 'reactflow';
+import { toPng } from 'html-to-image';
+
+// Hàm hỗ trợ tải ảnh
+function downloadImage(dataUrl) {
+  const a = document.createElement('a');
+  a.setAttribute('download', 'reactflow-map.png');
+  a.setAttribute('href', dataUrl);
+  a.click();
+}
+
+const ImageExporter = () => {
+  const { getNodes, getNodesBounds } = useReactFlow();
+
+  const onCapture = () => {
+    // 1. Lấy tất cả các nodes hiện có
+    const nodes = getNodes();
+    if (nodes.length === 0) return;
+
+    // 2. Tính toán vùng bao quanh (bounds) của toàn bộ nodes
+    const nodesBounds = getNodesBounds(nodes);
+    
+    // 3. Định dạng kích thước ảnh muốn xuất (ví dụ: 600x400)
+    const imageWidth = 600;
+    const imageHeight = 400;
+
+    // 4. Tính toán transform (x, y, zoom) để các nodes nằm gọn trong khung hình
+    const transform = getTransformForBounds(
+      nodesBounds,
+      imageWidth,
+      imageHeight,
+      0.5, // zoom tối thiểu
+      2    // zoom tối đa
+    );
+
+    // 5. Chụp ảnh phần tử .react-flow__viewport
+    const viewportElement = document.querySelector('.react-flow__viewport');
+    
+    toPng(viewportElement, {
+      backgroundColor: '#f8f8f8',
+      width: imageWidth,
+      height: imageHeight,
+      style: {
+        width: `${imageWidth}px`,
+        height: `${imageHeight}px`,
+        // Áp dụng transform để đưa toàn bộ node vào "tầm ngắm" của ảnh
+        transform: `translate(${transform[0]}px, ${transform[1]}px) scale(${transform[2]})`,
+      },
+    }).then(downloadImage);
+  };
+
+  return (
+    <Panel position="top-right">
+      <button onClick={onCapture} style={{ padding: '10px', cursor: 'pointer' }}>
+        📸 Chụp toàn bộ Map
+      </button>
+    </Panel>
+  );
+};
+
+// Component chính
+export default function Flow() {
+  return (
+    <div style={{ width: '100vw', height: '100vh' }}>
+      <ReactFlow
+        nodes={initialNodes}
+        edges={initialEdges}
+        fitView
+      >
+        <ImageExporter />
+      </ReactFlow>
+    </div>
+  );
+}
